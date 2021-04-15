@@ -1,19 +1,45 @@
-plugins {
-    id 'java'
-}
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
 
-group 'org.example'
+group 'com.automation'
 version '1.0-SNAPSHOT'
 
-repositories {
-    mavenCentral()
-}
+sourceCompatibility = 1.8
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
 
+repositories {
+    mavenLocal()
+    jcenter()
+}
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.30")
+    }
+}
+ext {
+    serenityVersion = '2.0.30'
+    serenityCucumberVersion = '1.9.4'
+}
 dependencies {
+    testImplementation "net.serenity-bdd:serenity-core:$rootProject.ext.serenityVersion"
+    testImplementation "net.serenity-bdd:serenity-junit:$rootProject.ext.serenityVersion"
+    compile "net.serenity-bdd:serenity-cucumber:$rootProject.ext.serenityCucumberVersion"
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.assertj:assertj-core:3.9.1'
+    testCompile 'org.slf4j:slf4j-simple:1.7.7'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
+gradle.startParameter.continueOnFailure = true
+
 
 test {
     useJUnitPlatform()
+    systemProperty "cucumber.options", System.getProperty("cucumber.options")
 }
