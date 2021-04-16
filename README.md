@@ -19,7 +19,9 @@ for mobile tests you must run appium server and put de capabilities in `MyCustom
 in `Runner` you can select the different Tags to run separate test cases or the entire test set:
 
 `@ AllCases`
+
 `@ MobileCases, @ ApiCases`
+
 `@ TestCase_1, @ TestCase_2 ...`
 
 ### Tools and technologies used 🛠
