@@ -14,6 +14,8 @@ in terminal:
 gradle clean test aggregate
 ```
 for mobile tests you must run appium server and put de capabilities in `MyCustomDriver.class`
+
+
 in `Runner` you can select the different Tags to run separate test cases or the entire test set:
 
 `@ AllCases`
