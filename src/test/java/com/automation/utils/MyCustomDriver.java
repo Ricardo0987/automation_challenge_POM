@@ -33,9 +33,8 @@ public class MyCustomDriver implements DriverSource {
         try {
 
             appDriver = new AppiumDriver<MobileElement>(new URL(url), capabilities);
-            Thread.sleep(2500);
             appDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-        } catch (MalformedURLException | InterruptedException e) {
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         appDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);

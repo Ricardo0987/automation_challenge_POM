@@ -42,6 +42,6 @@ gradle.startParameter.continueOnFailure = true
 
 
 test {
-    useJUnitPlatform()
+//    useJUnitPlatform()
 //    systemProperty "cucumber.options", System.getProperty("cucumber.options")
 }

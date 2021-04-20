@@ -1,0 +1,25 @@
+#using docker command: docker run --rm --network host -u gradle -v "$PWD":/home/gradle/project -w /home/gradle/project gradle:6.7 gradle clean test aggregate -Dcucumber.options="--tags @AllCases"
+#using docker compose command: TARGET=AllCases docker-compose up
+
+version: "3"
+services:
+  #TODO: for appium - tip:https://hub.docker.com/r/appium/appium
+  #  nodejs_server:
+  #    image: node:12.20
+  #    network_mode: "host"
+  #    container_name: nodejs_server
+  #    working_dir: /src
+  #    command: bash -c "npm i  && node some.js"
+  gradle:
+    image: gradle:6.7
+    network_mode: "host"
+    container_name: gradle
+    deploy:
+      resources:
+        limits:
+          memory: 800m #800MB de ram
+          cpus: "0.7" #70% de cpu
+    working_dir: /home/gradle/project
+    volumes:
+      - "./:/home/gradle/project"
+    command: gradle clean test aggregate -Dcucumber.options="--tags @${TARGET}"

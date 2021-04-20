@@ -84,7 +84,7 @@ public class PrincipalPage extends PageObject {
     }
 
     private void scrollDown() throws InterruptedException {
-        Thread.sleep(2000);
+        waitFor(leftMenu).isVisible();
         AppiumDriver driver = MyCustomDriver.getDriver();
         Dimension size = driver.manage().window().getSize();
         int width = size.width / 2;

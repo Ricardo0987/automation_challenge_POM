@@ -4,11 +4,7 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 
-import java.util.logging.Level;
-
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import static io.restassured.RestAssured.given;
-import static org.apache.fontbox.afm.AFMParser.NOTICE;
 
 public class ApiSteps {
     private static Response response;
@@ -31,7 +27,6 @@ public class ApiSteps {
             return response;
 
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, String.format(NOTICE, e.getMessage()));
             return null;
         }
     }
@@ -51,7 +46,7 @@ public class ApiSteps {
             Assertions.assertEquals(expectedresponse.split(",")[0], username);
             Assertions.assertEquals(expectedresponse.split(",")[1], status);
             Assertions.assertEquals(expectedresponse.split(",")[2], species);
-            Assertions.assertNotNull(id);
+            Assertions.assertTrue(id > 0);
         } else {
 
             String error = response.jsonPath().get("error");
@@ -71,7 +66,7 @@ public class ApiSteps {
             Assertions.assertEquals(expectedResponse.split(",")[0], username);
             Assertions.assertEquals(expectedResponse.split(",")[1], status);
             Assertions.assertEquals(expectedResponse.split(",")[2], species);
-            Assertions.assertNotNull(id);
+            Assertions.assertTrue(id > 0);
         } else {
 
             String error = response.jsonPath().get("error");
@@ -91,7 +86,7 @@ public class ApiSteps {
             Assertions.assertEquals(expectedResponse.split(",")[0], username);
             Assertions.assertEquals(expectedResponse.split(",")[1], type);
             Assertions.assertEquals(expectedResponse.split(",")[2], dimension);
-            Assertions.assertNotNull(id);
+            Assertions.assertTrue(id > 0);
         } else {
 
             String error = response.jsonPath().get("error");
@@ -111,7 +106,7 @@ public class ApiSteps {
             Assertions.assertEquals(expectedResponse.split("--")[0], username);
             Assertions.assertEquals(expectedResponse.split("--")[1], airDate);
             Assertions.assertEquals(expectedResponse.split("--")[2], episode);
-            Assertions.assertNotNull(id);
+            Assertions.assertTrue(id > 0);
         } else {
 
             String error = response.jsonPath().get("error");
