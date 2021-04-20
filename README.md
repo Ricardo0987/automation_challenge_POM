@@ -8,7 +8,7 @@ Using POM (Page Object Model) design pattern.
 
 ## Execution 🚀
 ---
-in terminal:
+in console:
 
 ```bash
 gradle clean test aggregate
@@ -36,6 +36,7 @@ in `Runner` you can select the different Tags to run separate test cases or the 
 - Serenity
 - IDE IntelliJ
 - Ubuntu 20
+- SonarLint (plugin-IntelliJ)
 
 ### Tips and alternatives to execute
 - use `appium-doctor` (npm i -g appium-doctor) to check the dependencies for appium for example:

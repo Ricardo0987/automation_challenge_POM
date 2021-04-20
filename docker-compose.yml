@@ -17,8 +17,8 @@ services:
     deploy:
       resources:
         limits:
-          memory: 800m #800MB de ram
-          cpus: "0.7" #70% de cpu
+          memory: 800m #800MB  ram
+          cpus: "0.7" #70%  cpu
     working_dir: /home/gradle/project
     volumes:
       - "./:/home/gradle/project"
