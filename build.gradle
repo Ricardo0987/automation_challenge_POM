@@ -40,8 +40,43 @@ dependencies {
 }
 gradle.startParameter.continueOnFailure = true
 
+gradle.buildFinished {
+    println "task - reports change for improve images"
+    def cssFile = new File("target/site/serenity/css/core.css")
+
+    def oldCss = '#slider {\n' +
+            '    position:relative;\n' +
+            '    width:1000px;'
+    def newCss = '#slider {\n' +
+            '\tmargin-left:35%;\n' +
+            '    position:relative;\n' +
+            '    width:300px;'
+
+    def newCssFile = cssFile.text.replace(oldCss,newCss)
+    cssFile.text = newCssFile
+
+    def jsFile = new File("target/site/serenity/scripts/imgpreview.full.jquery.js")
+    def oldJs = '(function($){'
+    def newJs = 'window.onload = function () {\n' +
+            '  setTimeout(function () {\n' +
+            '    $("body #imgPreviewContainer:last img").css("width", "250px");\n' +
+            '    $(".nivo-controlNav .nivo-control").click(function () {\n' +
+            '      setTimeout(function () {\n' +
+            '        console.log("oe");\n' +
+            '        $(".nivo-slice img").style.setProperty("width", "400px", "important");\n' +
+            '      }, 500);\n' +
+            '    });\n' +
+            '  }, 100);\n' +
+            '};\n' +
+            '(function($){'
+    def newJsFile = jsFile.text.replace(oldJs,newJs)
+    jsFile.text = newJsFile
+}
+
 
 test {
-//    useJUnitPlatform()
-//    systemProperty "cucumber.options", System.getProperty("cucumber.options")
+//    useJUnitPlatform() //NOTE:activate in local ide test for JUnit
+    systemProperty "cucumber.options", System.getProperty("cucumber.options")
+    systemProperty "user.country", "CO"
+    systemProperty "user.timezone", "America/Bogota"
 }
